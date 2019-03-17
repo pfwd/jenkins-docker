@@ -8,6 +8,7 @@ services:
   jenkins:
     build:
       context: .
+    container_name: jenkins
     ports:
       - '8080:8080'
       - '50000:50000'
