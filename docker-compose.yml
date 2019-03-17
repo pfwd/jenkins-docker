@@ -1,0 +1,38 @@
+version: '3'
+
+volumes:
+  vol_jenkins_home:
+    driver: local
+
+services:
+  jenkins:
+    build:
+      context: .
+    ports:
+      - '80:8080'
+      - '50000:50000'
+    env_file:
+        - .env
+    volumes:
+      - vol_jenkins_home:/var/jenkins_home
+      - '/var/run/docker.sock:/var/run/docker.sock'
+      - '/usr/local/bin/docker:/usr/bin/docker'
+
+
+
+
+      version: '2'
+      volumes:
+        vol_jenkins_home:
+          driver: local
+      services:
+        jenkins:
+          container_name: jenkins
+          image: jenkins/jenkins:lts
+          ports:
+          - "8080:8080"
+          - "5000:5000"
+          volumes:
+          - vol_jenkins_home:/var/jenkins_home
+          - /var/run/docker.sock:/var/run/docker.sock
+          - /usr/local/bin/docker:/usr/bin/docker
